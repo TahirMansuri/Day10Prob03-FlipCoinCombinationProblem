@@ -10,13 +10,17 @@ n=0;
 F="";
 index=1;
 
-HHCount=0;
-TTCount=0;
-HTCount=0;
-THCount=0;
+HHHCount=0;
+HHTCount=0;
+HTHCount=0;
+HTTCount=0;
+THHCount=0;
+THTCount=0;
+TTHCount=0;
+TTTCount=0;
 
 # Flip Coin to get Head and Tail
-for (( i=1; i<=20; i++ ))
+for (( i=1; i<=30; i++ ))
 do
 	flip=$((RANDOM%2));
 	case $flip in
@@ -28,23 +32,35 @@ do
 		;;
 	esac
 	((n++));
-	if (( n==2 ))
+	if (( n==3 ))
 	then
 		DoubletDict[$index]=$F;
 		n=0;
 
 		case $F in
-			'HH')
-				((HHCount++));
+			'HHH')
+				((HHHCount++));
 			;;
-			'TT')
-				((TTCount++));
+			'HHT')
+				((HHTCount++));
 			;;
-			'TH')
-				((THCount++));
+			'HTH')
+				((HTHCount++));
 			;;
-			'HT')
-				((HTCount++));
+			'HTT')
+				((HTTCount++));
+			;;
+			'THH')
+				((THHCount++));
+			;;
+			'THT')
+				((THTCount++));
+			;;
+			'TTH')
+				((TTHCount++));
+			;;
+			'TTT')
+				((TTTCount++));
 			;;
 		esac
 
@@ -54,11 +70,15 @@ do
 
 done
 
-#Getting Percentage of Head and Tail Double Occurance
-echo "HH Percentage="$(( $HHCount * 10 ));
-echo "TT Percentage="$(( $TTCount * 10 ));
-echo "TH Percentage="$(( $THCount * 10 ));
-echo "HT Percentage="$(( $HTCount * 10 ));
+#Getting Percentage of Head and Tail Triplet Occurance
+echo "HHH Percentage="$(( $HHHCount * 10 ));
+echo "HHT Percentage="$(( $HHTCount * 10 ));
+echo "HTH Percentage="$(( $HTHCount * 10 ));
+echo "HTT Percentage="$(( $HTTCount * 10 ));
+echo "THH Percentage="$(( $THHCount * 10 ));
+echo "THT Percentage="$(( $THTCount * 10 ));
+echo "TTH Percentage="$(( $TTHCount * 10 ));
+echo "TTT Percentage="$(( $TTTCount * 10 ));
 
 for key in ${!DoubletDict[@]}
 do
